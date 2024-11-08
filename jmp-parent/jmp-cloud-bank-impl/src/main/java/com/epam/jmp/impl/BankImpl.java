@@ -10,12 +10,14 @@ import java.util.UUID;
 
 public class BankImpl implements Bank {
     private final List<BankCard> cards = new ArrayList<>();
+
     @Override
     public BankCard createBankCard(User user, BankCardType cardType) {
         var card = switch(cardType) {
-            case DEBIT: new DebitBankCard(UUID.randomUUID().toString(), user, 0); break;
-            case CREDIT: new CreditBankCard(UUID.randomUUID().toString(), user, 0); break;
+            case DEBIT -> new DebitBankCard(UUID.randomUUID().toString(), user, 0);
+            case CREDIT -> new CreditBankCard(UUID.randomUUID().toString(), user, 0);
         };
-
+        cards.add(card);
+        return card;
     }
 }
