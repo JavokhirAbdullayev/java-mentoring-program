@@ -7,7 +7,6 @@ import com.epam.jmp.service.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,18 +16,20 @@ public class ServiceImpl implements Service {
 
     @Override
     public void subscribe(BankCard bankCard) {
-        subscriptions.add(new Subscription(bankCard.getNumber(), LocalDate.now()));
+        subscriptions.add(new Subscription(bankCard, LocalDate.now()));
     }
 
     @Override
     public Optional<Subscription> getSubscriptionByBankCardNumber(String cardNumber) {
         return subscriptions.stream()
-                .filter(subscription -> subscription.getBankcard().equals(cardNumber))
+                .filter(subscription -> subscription.bankcard().getNumber().equals(cardNumber))
                 .findFirst();
     }
 
     @Override
     public List<User> getAllUsers() {
-        return Collections.EMPTY_LIST;
+        return subscriptions.stream()
+                .map(Subscription::bankcard)
+                .map(BankCard::getUser).toList();
     }
 }
