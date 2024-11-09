@@ -15,7 +15,7 @@
     <module>jmp-cloud-bank-impl</module>
     <module>jmp-cloud-service-impl</module>
     <module>jmp-dto</module>
-<!--    <module>jmp-app</module>-->
+    <module>jmp-app</module>
   </modules>
 
   <properties>
@@ -29,6 +29,13 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.11.3</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
 
   <build>

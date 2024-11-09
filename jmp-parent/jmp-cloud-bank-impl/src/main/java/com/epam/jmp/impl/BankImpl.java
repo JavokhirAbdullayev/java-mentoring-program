@@ -1,7 +1,7 @@
 package com.epam.jmp.impl;
 
 import com.epam.jmp.dto.*;
-import com.epam.jmp.service.Bank;
+import com.epam.jmp.api.Bank;
 
 import java.util.ArrayList;
 import java.util.List;
