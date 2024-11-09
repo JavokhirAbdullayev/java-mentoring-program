@@ -2,7 +2,7 @@ package com.epam.jmp;
 
 import com.epam.jmp.dto.BankCardType;
 import com.epam.jmp.dto.User;
-import com.epam.jmp.impl.BankImpl;
+import com.epam.jmp.bank.impl.BankImpl;
 import com.epam.jmp.api.Bank;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.epam.jmp.impl;
+package com.epam.jmp.bank.impl;
 
 import com.epam.jmp.dto.*;
 import com.epam.jmp.api.Bank;
