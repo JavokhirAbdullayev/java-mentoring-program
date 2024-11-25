@@ -1,4 +1,4 @@
-package com.epam.jmp.service;
+package com.epam.jmp.api;
 
 import com.epam.jmp.dto.BankCard;
 import com.epam.jmp.dto.BankCardType;
