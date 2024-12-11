@@ -1,9 +1,14 @@
 package com.epam;
 
 
+import com.epam.exceptions.BookAlreadyLoanedException;
+import com.epam.exceptions.BookNotFoundException;
+import com.epam.exceptions.UserNotAllowedToLoanException;
 import com.epam.model.Book;
+import com.epam.observer.EmailNotifier;
 import com.epam.service.BookFactory;
 import com.epam.service.LibraryManagementSystem;
+import com.epam.strategy.RestrictedLoanPolicy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class LibraryManagementSystemTest {
@@ -101,4 +106,23 @@ public class LibraryManagementSystemTest {
         assertNotNull(library.getBooks().get("BK003"));
         assertEquals("Algorithms", library.getBooks().get("BK003").getTitle());
     }
+
+    @Test
+    void testObserverNotification() throws BookNotFoundException, BookAlreadyLoanedException, UserNotAllowedToLoanException {
+        EmailNotifier emailNotifier = new EmailNotifier("user@example.com");
+        library.addObserver(emailNotifier);
+
+        library.checkOutBook("BK001", "USR001");
+        // Verify email notifications manually (or mock the observer and verify interaction).
+    }
+
+    @Test
+    void testRestrictedLoanPolicy() {
+        library.imposeFine("USR001", 50);
+        library.setLoanPolicy(new RestrictedLoanPolicy(library));
+
+        assertThrows(UserNotAllowedToLoanException.class, () -> library.checkOutBook("BK001", "USR001"));
+    }
+
+
 }
